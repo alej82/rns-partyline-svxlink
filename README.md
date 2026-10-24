@@ -77,7 +77,15 @@ SvxLink upgrade.
 
 ## Configuration
 
-A single INI file: `config/ModuleRnsPartyline.conf`.
+A single INI file: `config/ModuleRnsPartyline.conf`. It is **not** tracked in
+git because it holds the server hash and optional passwords; create it from
+the tracked template before building or testing:
+
+```bash
+cp config/ModuleRnsPartyline.conf.example config/ModuleRnsPartyline.conf
+chmod 600 config/ModuleRnsPartyline.conf
+# edit SERVER_HASH (and passwords, if any)
+```
 
 | Section | Key | Read by | Notes |
 |---|---|---|---|
@@ -475,7 +483,9 @@ sidecar also reconnects to the server.
 CMakeLists.txt                     external module build
 src/module/ModuleRnsPartyline.*    C++ plugin: control, audio, PTT, activation
 sidecar/rns_partyline_sidecar.py   Partyline client + control/audio sockets
-config/ModuleRnsPartyline.conf     single shared configuration
+config/ModuleRnsPartyline.conf     local shared configuration (gitignored)
+config/ModuleRnsPartyline.conf.example
+                                   tracked template with a placeholder hash
 test/svxlink-test.conf             text-only test SvxLink instance
 test/svxlink-test-audio.conf       UDP audio test instance
 test/svxlink-test-radio.conf       real card + HID PTT test instance

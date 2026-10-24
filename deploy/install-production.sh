@@ -19,6 +19,11 @@ if [ ! -f "$ROOT/build/ModuleRnsPartyline.so" ]; then
   echo "error: falta $ROOT/build/ModuleRnsPartyline.so; ejecuta scripts/build.sh" >&2
   exit 1
 fi
+if [ ! -f "$ROOT/config/ModuleRnsPartyline.conf" ]; then
+  echo "error: falta $ROOT/config/ModuleRnsPartyline.conf" >&2
+  echo "       copia config/ModuleRnsPartyline.conf.example y pon tu SERVER_HASH" >&2
+  exit 1
+fi
 if [ ! -f "$SVX_CONF" ]; then
   echo "error: no encuentro $SVX_CONF" >&2
   exit 1

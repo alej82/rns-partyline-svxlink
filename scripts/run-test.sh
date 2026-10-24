@@ -22,6 +22,12 @@ if [ ! -x "$SVXLINK" ]; then
   exit 1
 fi
 
+if [ ! -f "$BASE_CONFIG" ]; then
+  echo "error: falta $BASE_CONFIG" >&2
+  echo "       copia config/ModuleRnsPartyline.conf.example y pon tu SERVER_HASH" >&2
+  exit 1
+fi
+
 if [ ! -f "$ROOT/build/ModuleRnsPartyline.so" ]; then
   echo "error: falta build/ModuleRnsPartyline.so; ejecuta scripts/build.sh" >&2
   exit 1

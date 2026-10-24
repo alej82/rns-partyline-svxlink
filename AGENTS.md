@@ -27,7 +27,9 @@ Partyline connection, configuration and secrets.
 CMakeLists.txt                     external module build
 src/module/ModuleRnsPartyline.*    C++ plugin: control, audio, PTT, activation
 sidecar/rns_partyline_sidecar.py   Partyline client + control/audio sockets
-config/ModuleRnsPartyline.conf     single INI shared by both processes
+config/ModuleRnsPartyline.conf     local INI shared by both processes (gitignored)
+config/ModuleRnsPartyline.conf.example
+                                   tracked template, placeholder SERVER_HASH
 test/svxlink-test.conf             text-only test SvxLink instance (template)
 test/svxlink-test-audio.conf       UDP audio test instance (template)
 test/svxlink-test-radio.conf       real card + HID PTT test instance (template)
@@ -164,6 +166,11 @@ the local `test/events.tcl`, `test/events.d/*` and `test/sounds` symlinks.
 
 ## Configuration contract
 
+The real INI (`config/ModuleRnsPartyline.conf`) is gitignored because it holds
+the server hash and optional passwords. Copy
+`config/ModuleRnsPartyline.conf.example` and fill in `SERVER_HASH`;
+`run-test.sh` and the installer fail with a clear message when it is missing.
+
 One INI, three sections:
 
 - `[ModuleRnsPartyline]`: `NAME=RnsPartyline` (must match `Module<NAME>.so`),
@@ -286,8 +293,9 @@ bounded queues and drop the oldest samples on overflow.
   `systemctl stop svxlink` first; the normal `--text`/`--audio` harnesses never
   touch the real card.
 - The current config points to a server named `Test` and room `Opus High`.
-  Its destination hash lives only in `config/ModuleRnsPartyline.conf`;
-  do not copy it into documentation.
+  Its destination hash lives only in the gitignored
+  `config/ModuleRnsPartyline.conf`; the tracked `.example` keeps a
+  placeholder. Do not copy the real hash into documentation or git.
 - `test/events.tcl` and `test/events.d/*` are symlinks to the installed
   SvxLink files; only `test/events.d/RnsPartyline.tcl` is project-owned.
 - The sidecar's RNS config must have `share_instance = No`. The development

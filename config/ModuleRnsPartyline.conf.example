@@ -36,6 +36,7 @@ AUDIO_PUSH_MS=20
 
 [partyline]
 # Hash de destino del servidor Partyline (32 caracteres hexadecimales).
+# Sustituye el valor de ejemplo por el hash real de tu servidor.
 SERVER_HASH=00000000000000000000000000000000
 # Sala: numero (1..N en el orden del servidor) o nombre exacto sin distinguir
 # mayusculas, por ejemplo: ROOM=Opus High
