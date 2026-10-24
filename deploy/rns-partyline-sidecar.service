@@ -1,0 +1,23 @@
+[Unit]
+Description=RNS Partyline sidecar for SvxLink
+Documentation=file:/home/areche/rns-partyline-svx/README.md
+After=network-online.target
+Wants=network-online.target
+Before=svxlink.service
+StartLimitIntervalSec=60
+StartLimitBurst=3
+
+[Service]
+Type=simple
+User=areche
+Group=areche
+Environment=HOME=/home/areche
+Environment=PYTHONUNBUFFERED=1
+WorkingDirectory=/home/areche/rns-partyline-svx
+ExecStart=/usr/bin/python3 /home/areche/rns-partyline-svx/sidecar/rns_partyline_sidecar.py --config /usr/local/etc/svxlink/svxlink.d/ModuleRnsPartyline.conf
+Restart=on-failure
+RestartSec=5
+SyslogIdentifier=rns-partyline-sidecar
+
+[Install]
+WantedBy=multi-user.target

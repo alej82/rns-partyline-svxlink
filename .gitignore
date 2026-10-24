@@ -1,0 +1,9 @@
+build/
+__pycache__/
+*.pyc
+
+# Runtime symlinks created by scripts/run-test.sh to the installed SvxLink tree
+test/events.tcl
+test/sounds
+test/events.d/*.tcl
+!test/events.d/RnsPartyline.tcl
